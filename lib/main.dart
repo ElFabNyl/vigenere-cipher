@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FlutterNativeSplash.remove();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

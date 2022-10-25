@@ -83,4 +83,9 @@ class Brain {
      String cleanUp = clearMessage.replaceAll('null', ' ');
     return cleanUp;
   }
+
+
+  static arielle(int a, int b){
+    return a+b;
+  }
 }
