@@ -2,7 +2,7 @@ class Brain {
   ///this function return verifies if a letter belongs to the alphabet
   static isAlphabet(String letter) {
     //we define an alphabet
-    List alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+    List alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z', '`', '~', '!', '@','#', '%', '*', ':', ';', ',' '=', '<', '>', '?', '-','+', '.', '&'];
     //we convert the input to upperCase for a better usage
     letter.toUpperCase();
     //we check wether the alphabet contrains the letter
@@ -85,7 +85,4 @@ class Brain {
   }
 
 
-  static arielle(int a, int b){
-    return a+b;
-  }
 }
