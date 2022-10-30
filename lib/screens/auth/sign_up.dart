@@ -4,10 +4,10 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vigenere/control/brainctrl.dart';
-import 'package:vigenere/screens/auth/sign_up.dart';
+import 'package:vigenere/screens/home/index.dart';
 
-class SignIn extends StatelessWidget {
-  const SignIn({super.key});
+class SignUp extends StatelessWidget {
+  const SignUp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class SignIn extends StatelessWidget {
                       height: 15.0,
                     ),
                     const Text(
-                      'SIGN  IN ',
+                      'REGISTER',
                       style: TextStyle(
                           fontWeight: FontWeight.w800,
                           letterSpacing: 1.8,
@@ -82,18 +82,64 @@ class SignIn extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 15.0, vertical: 20.0),
+                      horizontal: 15.0, vertical: 8.0),
                   child: Column(
                     children: [
+                      
                       TextFormField(
                         onChanged: (value) {
                           //Do something with the user input.
-                          ctrl.userEmail.value = value;
+                         
+                        },
+                        keyboardType: TextInputType.text,
+                        cursorColor: Colors.grey,
+                        decoration: const InputDecoration(
+                          hintText: 'Enter User name',
+                          filled: true,
+                          fillColor: Color.fromARGB(255, 219, 219, 219),
+                          prefixIcon: Icon(
+                            Icons.person,
+                            color: Color(0xff3F0071),
+                          ),
+                          labelStyle: TextStyle(color: Colors.black),
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 20.0),
+                          border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 1.0),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide:
+                                BorderSide(color: Colors.white, width: 2.0),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30.0)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 15.0, vertical: 8.0),
+                  child: Column(
+                    children: [
+                      
+                      TextFormField(
+                        onChanged: (value) {
+                          //Do something with the user input.
+                         
                         },
                         keyboardType: TextInputType.emailAddress,
                         cursorColor: Colors.grey,
                         decoration: const InputDecoration(
-                          hintText: 'Enter email address',
+                          hintText: 'Enter Name',
                           filled: true,
                           fillColor: Color.fromARGB(255, 219, 219, 219),
                           prefixIcon: Icon(
@@ -179,7 +225,7 @@ class SignIn extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     //
-                    
+                    Get.offAll(()=> const Index());
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -189,7 +235,7 @@ class SignIn extends StatelessWidget {
                       padding: EdgeInsets.symmetric(
                           horizontal: 30.0, vertical: 13.0),
                       child: Text(
-                        'Proceed',
+                        'Register',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             color: Colors.white,
@@ -199,27 +245,8 @@ class SignIn extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Don’t have an account yet? ',
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                    TextButton(
-                        onPressed: () {
-                          //
-                          Get.to(()=> const SignUp());
-                        },
-                        child: const Text(
-                          'Signup',
-                          style: TextStyle(
-                              color: Color(0xff3F0071),
-                              fontWeight: FontWeight.w800),
-                        ))
-                  ],
-                )
+              
+                
               ],
             ),
           ),
