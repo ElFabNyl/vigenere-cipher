@@ -96,7 +96,7 @@ class SignUp extends StatelessWidget {
                         decoration: const InputDecoration(
                           hintText: 'Enter User name',
                           filled: true,
-                          fillColor: Color.fromARGB(255, 219, 219, 219),
+                          fillColor: Color.fromARGB(255, 245, 245, 245),
                           prefixIcon: Icon(
                             Icons.person,
                             color: Color(0xff3F0071),
@@ -141,7 +141,7 @@ class SignUp extends StatelessWidget {
                         decoration: const InputDecoration(
                           hintText: 'Enter Name',
                           filled: true,
-                          fillColor: Color.fromARGB(255, 219, 219, 219),
+                          fillColor: Color.fromARGB(255, 245, 245, 245),
                           prefixIcon: Icon(
                             Icons.email,
                             color: Color(0xff3F0071),
@@ -186,7 +186,7 @@ class SignUp extends StatelessWidget {
                         decoration: const InputDecoration(
                           hintText: 'Enter Password',
                           filled: true,
-                          fillColor: Color.fromARGB(255, 219, 219, 219),
+                          fillColor: Color.fromARGB(255, 245, 245, 245),
                           suffixIcon: Icon(
                             Icons.remove_red_eye,
                             color: Color(0xff3F0071),
