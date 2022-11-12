@@ -57,7 +57,7 @@ class DecryptedMessage extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 SizedBox(
-                  width: 370.0,
+                  width: 330.0,
                   height: 180,
                   child: Card(
                     elevation: 5.0,

@@ -69,7 +69,7 @@ class Index extends StatelessWidget {
                               height: 10.0,
                             ),
                             const SizedBox(
-                              width: 300,
+                              width: 260,
                               child: Text(
                                 'you are about to encrypt a message using Vigenere encryption.',
                                 textAlign: TextAlign.center,
@@ -81,7 +81,7 @@ class Index extends StatelessWidget {
                             ),
                             const SizedBox(height: 20.0),
                             SizedBox(
-                              width: 370,
+                              width: 330,
                               height: 180,
                               child: Card(
                                 elevation: 5.0,
@@ -123,7 +123,7 @@ class Index extends StatelessWidget {
                             ),
                             SizedBox(
                               height: 60,
-                              width: 370,
+                              width: 300,
                               child: Card(
                                 elevation: 5.0,
                                 child: TextFormField(

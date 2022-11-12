@@ -17,7 +17,7 @@ class SignIn extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 30.0),
+          padding: const EdgeInsets.symmetric(vertical: 15.0),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -25,14 +25,14 @@ class SignIn extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 120,
-                      width: 120,
+                      height: 100,
+                      width: 100,
                       child: Image.asset('assets/images/uy1.png'),
                     ),
                   ],
                 ),
                 const SizedBox(
-                  height: 15.0,
+                  height: 8.0,
                 ),
                 Column(
                   children: [
@@ -56,7 +56,7 @@ class SignIn extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(
-                      height: 15.0,
+                      height: 8.0,
                     ),
                     const Text(
                       'INFO 3145',
@@ -67,7 +67,7 @@ class SignIn extends StatelessWidget {
                           fontSize: 20),
                     ),
                     const SizedBox(
-                      height: 15.0,
+                      height: 8.0,
                     ),
                     const Text(
                       'SIGN  IN ',
@@ -79,11 +79,11 @@ class SignIn extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  height: 10.0,
+                  height: 8.0,
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 15.0, vertical: 20.0),
+                      horizontal: 15.0, vertical: 10.0),
                   child: Column(
                     children: [
                       TextFormField(
