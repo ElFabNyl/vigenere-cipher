@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vigenere/control/brainctrl.dart';
 import 'package:vigenere/screens/auth/sign_up.dart';
+import 'package:vigenere/screens/home/index.dart';
 
 class SignIn extends StatelessWidget {
   const SignIn({super.key});
@@ -46,7 +47,7 @@ class SignIn extends StatelessWidget {
                             text: 'PRACTICAL CRYPTOGRAPHY WORK',
                             textAlign: TextAlign.center,
                             waveColor: const Color(0xff3F0071),
-                            textStyle: const TextStyle( 
+                            textStyle: const TextStyle(
                               fontSize: 30.0,
                               fontWeight: FontWeight.w900,
                             ),
@@ -132,7 +133,7 @@ class SignIn extends StatelessWidget {
                       TextFormField(
                         onChanged: (value) {
                           //Do something with the user input.
-                          ctrl.userEmail.value = value;
+                          ctrl.userPassword.value = value;
                         },
                         keyboardType: TextInputType.text,
                         obscureText: true,
@@ -179,7 +180,39 @@ class SignIn extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     //
-                    
+                    if (ctrl.userEmail.value.isEmpty ||
+                        ctrl.userPassword.value.isEmpty) {
+                      Get.snackbar("NOTIFICATION", "please fill all the inputs",
+                          icon: const Icon(Icons.info, color: Colors.red),
+                          snackPosition: SnackPosition.TOP,
+                          duration: const Duration(seconds: 6));
+                    } else if (!GetUtils.isEmail(ctrl.userEmail.value)) {
+                      Get.snackbar(
+                          "NOTIFICATION", "The email entered is wrong !",
+                          icon: const Icon(Icons.info, color: Colors.red),
+                          snackPosition: SnackPosition.TOP,
+                          duration: const Duration(seconds: 6));
+                    } else if (ctrl.userPassword.value.length < 6) {
+                      Get.snackbar("NOTIFICATION",
+                          "The password must have at least 6 digits !",
+                          icon: const Icon(Icons.info, color: Colors.red),
+                          snackPosition: SnackPosition.TOP,
+                          duration: const Duration(seconds: 6));
+                    }else if(ctrl.checkEmail.value != ctrl.userEmail.value ||ctrl.checkPassord.value != ctrl.userPassword.value ){
+
+                      log(ctrl.checkEmail.value);
+                      log(ctrl.userEmail.value);
+                      Get.snackbar("NOTIFICATION",
+                          "Invalid credentatial ! verify and try again or create an account",
+                          icon: const Icon(Icons.info, color: Colors.red),
+                          snackPosition: SnackPosition.TOP,
+                          duration: const Duration(seconds: 6));
+                    } else {
+                      //
+
+
+                      Get.offAll(() => const Index());
+                    }
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -210,7 +243,7 @@ class SignIn extends StatelessWidget {
                     TextButton(
                         onPressed: () {
                           //
-                          Get.to(()=> const SignUp());
+                          Get.to(() => const SignUp());
                         },
                         child: const Text(
                           'Signup',

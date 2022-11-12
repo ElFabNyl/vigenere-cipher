@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vigenere/control/brainctrl.dart';
 import 'package:vigenere/screens/home/index.dart';
 
@@ -46,7 +47,7 @@ class SignUp extends StatelessWidget {
                             text: 'PRACTICAL CRYPTOGRAPHY WORK',
                             textAlign: TextAlign.center,
                             waveColor: const Color(0xff3F0071),
-                            textStyle: const TextStyle( 
+                            textStyle: const TextStyle(
                               fontSize: 30.0,
                               fontWeight: FontWeight.w900,
                             ),
@@ -85,11 +86,10 @@ class SignUp extends StatelessWidget {
                       horizontal: 15.0, vertical: 8.0),
                   child: Column(
                     children: [
-                      
                       TextFormField(
                         onChanged: (value) {
                           //Do something with the user input.
-                         
+                          ctrl.userName.value = value;
                         },
                         keyboardType: TextInputType.text,
                         cursorColor: Colors.grey,
@@ -130,16 +130,15 @@ class SignUp extends StatelessWidget {
                       horizontal: 15.0, vertical: 8.0),
                   child: Column(
                     children: [
-                      
                       TextFormField(
                         onChanged: (value) {
                           //Do something with the user input.
-                         
+                          ctrl.userEmail.value = value;
                         },
                         keyboardType: TextInputType.emailAddress,
                         cursorColor: Colors.grey,
                         decoration: const InputDecoration(
-                          hintText: 'Enter Name',
+                          hintText: 'Enter Email',
                           filled: true,
                           fillColor: Color.fromARGB(255, 245, 245, 245),
                           prefixIcon: Icon(
@@ -173,59 +172,94 @@ class SignUp extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: 15.0, vertical: 10.0),
-                  child: Column(
+                  child: Obx(()=> Column(
                     children: [
-                      TextFormField(
-                        onChanged: (value) {
-                          //Do something with the user input.
-                          ctrl.userEmail.value = value;
-                        },
-                        keyboardType: TextInputType.text,
-                        obscureText: true,
-                        cursorColor: Colors.grey,
-                        decoration: const InputDecoration(
-                          hintText: 'Enter Password',
-                          filled: true,
-                          fillColor: Color.fromARGB(255, 245, 245, 245),
-                          suffixIcon: Icon(
-                            Icons.remove_red_eye,
-                            color: Color(0xff3F0071),
-                          ),
-                          prefixIcon: Icon(
-                            Icons.key,
-                            color: Color(0xff3F0071),
-                          ),
-                          labelStyle: TextStyle(color: Colors.black),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 20.0),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30.0)),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.white, width: 1.0),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30.0)),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide:
-                                BorderSide(color: Colors.white, width: 2.0),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(30.0)),
+                       TextFormField(
+                          onChanged: (value) {
+                            //Do something with the user input.
+                            ctrl.userPassword.value = value;
+                          },
+                          keyboardType: TextInputType.text,
+                          obscureText: true,
+                          cursorColor: Colors.grey,
+                          decoration: InputDecoration(
+                            hintText: 'Enter Password',
+                            filled: ctrl.isInvisible.value,
+                            fillColor: const Color.fromARGB(255, 245, 245, 245),
+                            suffixIcon: IconButton(onPressed: (){
+                              ctrl.isInvisible.value = !ctrl.isInvisible.value;
+                            }, icon: const Icon(
+                              Icons.remove_red_eye,
+                              color: Color(0xff3F0071),
+                            ),),
+                            prefixIcon: const Icon(
+                              Icons.key,
+                              color: Color(0xff3F0071),
+                            ),
+                            labelStyle: const TextStyle(color: Colors.black),
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 10.0, horizontal: 20.0),
+                            border: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.0)),
+                            ),
+                            enabledBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.white, width: 1.0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.0)),
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderSide:
+                                  BorderSide(color: Colors.white, width: 2.0),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.0)),
+                            ),
                           ),
                         ),
-                      ),
+                      
                     ],
-                  ),
+                  ),)
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     //
-                    Get.offAll(()=> const Index());
+
+                    if (ctrl.userName.value.isEmpty ||
+                        ctrl.userEmail.value.isEmpty ||
+                        ctrl.userPassword.value.isEmpty) {
+                      Get.snackbar("NOTIFICATION", "please fill all the inputs",
+                          icon: const Icon(Icons.info, color: Colors.red),
+                          snackPosition: SnackPosition.TOP,
+                          duration: const Duration(seconds: 6));
+                    } else if (!GetUtils.isEmail(ctrl.userEmail.value)) {
+                      Get.snackbar(
+                          "NOTIFICATION", "The email entered is wrong !",
+                          icon: const Icon(Icons.info, color: Colors.red),
+                          snackPosition: SnackPosition.TOP,
+                          duration: const Duration(seconds: 6));
+                    } else if (ctrl.userPassword.value.length < 6) {
+                      Get.snackbar("NOTIFICATION",
+                          "The password must have at least 6 digits !",
+                          icon: const Icon(Icons.info, color: Colors.red),
+                          snackPosition: SnackPosition.TOP,
+                          duration: const Duration(seconds: 6));
+                    } else {
+                      SharedPreferences pref =
+                          await SharedPreferences.getInstance();
+                      pref.setString('email', ctrl.userEmail.value);
+                      pref.setString('name', ctrl.userName.value);
+                      pref.setString('password', ctrl.userPassword.value);
+                      Get.offAll(() => const Index());
+                      Get.snackbar("NOTIFICATION",
+                          "you've successfully register to the app",
+                          icon: const Icon(Icons.info, color: Colors.green),
+                          snackPosition: SnackPosition.BOTTOM,
+                          duration: const Duration(seconds: 6));
+                    }
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -245,8 +279,6 @@ class SignUp extends StatelessWidget {
                     ),
                   ),
                 ),
-              
-                
               ],
             ),
           ),

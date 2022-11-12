@@ -1,8 +1,8 @@
 class Brain {
   ///this function return verifies if a letter belongs to the alphabet
-  static isAlphabet(String letter) {
+  static  isAlphabet(String letter)  {
     //we define an alphabet
-    List alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z', '`', '~', '!', '@','#', '%', '*', ':', ';', ',' '=', '<', '>', '?', '-','+', '.', '&'];
+    List alphabet = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z', ];
     //we convert the input to upperCase for a better usage
     letter.toUpperCase();
     //we check wether the alphabet contrains the letter
@@ -14,7 +14,7 @@ class Brain {
   }
 
   ///this function helps us to establish an association between the message and the key
-  static keyFromMessage(String message, String key) {
+  static Future keyFromMessage(String message, String key) async {
     String keyFromMessage = '';
     int i = 0;
 
@@ -57,9 +57,9 @@ class Brain {
   ///this function will encrypt a message
   ///@params : message , key
 
-    encrypt(String message, String key) {
+   static Future  encrypt(String message, String key) async {
     String  cipherText = '';
-    String paddedKEY = keyFromMessage(message, key);
+    String paddedKEY = await keyFromMessage(message, key);
 
     for(int i=0; i<message.length; i++){
         cipherText = cipherText + encryptDecryptChar(message[i].toUpperCase(),paddedKEY[i].toUpperCase(), 'encrypt' ).toString();
@@ -71,9 +71,9 @@ class Brain {
   ///this function will decrypt a message
   ///@params : cipherText , key
 
- static decrypt(String cipherText, String key) {
+ static Future decrypt(String cipherText, String key)async {
     String clearMessage = '';
-    String paddedKEY = keyFromMessage(cipherText, key);
+    String paddedKEY =await keyFromMessage(cipherText, key);
 
     for (int i = 0; i < cipherText.length; i++) {
       clearMessage = clearMessage +

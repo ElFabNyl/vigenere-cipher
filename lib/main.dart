@@ -5,11 +5,13 @@ import 'package:vigenere/screens/auth/sign_in.dart';
 
 import 'control/brainctrl.dart';
 
-void main() {
+void main() async{
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   WidgetsFlutterBinding.ensureInitialized();
   Get.lazyPut(()=>Brainctrl());
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  Brainctrl ctrl = Get.find();
+  await ctrl.check();
   runApp(const MyApp());
 }
 
